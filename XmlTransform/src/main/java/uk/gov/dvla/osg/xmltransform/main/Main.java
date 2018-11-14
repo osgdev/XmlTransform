@@ -28,6 +28,7 @@ public class Main {
             return;
         }
         
+        // LOAD INPUT FILE
         String inputXmlFileName = args[0];
         File inputXmlFile = new File(inputXmlFileName);
         
@@ -38,6 +39,7 @@ public class Main {
         
         LOGGER.debug("Input file loaded {}", inputXmlFileName);
         
+        // CREATE OUTPUT FILE
         String outputFileName = args[1];
         File outputFile = new File(outputFileName);
         
@@ -46,6 +48,7 @@ public class Main {
             System.exit(1);
         }
         
+        // READ INPUT FILE
         XmlMapper mapper = new XmlMapper();
         CollectionType mapCollectionType = mapper.getTypeFactory().constructCollectionType(List.class, Map.class);
         
@@ -58,6 +61,7 @@ public class Main {
             System.exit(1);
         }
         
+        // WRITE PIPE DELIMITED OUTPUT FILE
         TextStringBuilder sb = new TextStringBuilder();
         
         for (Map<String, String> result : results) {
