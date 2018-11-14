@@ -19,7 +19,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 public class Main {
     
     static final Logger LOGGER = LogManager.getLogger();
-    static final String NEWLINE = "\n";
     
     public static void main(String[] args) {
         
