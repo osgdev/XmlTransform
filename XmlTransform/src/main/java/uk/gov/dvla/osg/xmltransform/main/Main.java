@@ -24,7 +24,7 @@ public class Main {
         
         if (args.length != 2) {
             LOGGER.error("Incorrect number of arguments supplied.");
-            return;
+            System.exit(1);
         }
         
         // LOAD INPUT FILE
@@ -36,7 +36,7 @@ public class Main {
             System.exit(1);
         }
         
-        LOGGER.debug("Input file loaded {}", inputXmlFileName);
+        LOGGER.info("Input file loaded {}", inputXmlFileName);
         
         // CREATE OUTPUT FILE
         String outputFileName = args[1];
@@ -77,11 +77,11 @@ public class Main {
         
         try {
             FileUtils.writeStringToFile(outputFile, sb.toString(), StandardCharsets.UTF_8, false);
+            LOGGER.info("Content written to: {}", outputFileName);
         } catch (IOException ex) {
             LOGGER.error("Unable to write data to output file {} : {}", outputFileName, outputFile);
         }
 
-        LOGGER.debug("Content written to: {}", outputFileName);
     }
 
 }
