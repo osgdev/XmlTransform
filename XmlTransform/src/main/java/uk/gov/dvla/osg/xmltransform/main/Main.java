@@ -22,6 +22,7 @@ public class Main {
     
     public static void main(String[] args) {
         
+        // VERIFY ARGS
         if (args.length != 2) {
             LOGGER.error("Incorrect number of arguments supplied.");
             System.exit(1);
@@ -39,11 +40,11 @@ public class Main {
         LOGGER.info("Input file loaded {}", inputXmlFileName);
         
         // CREATE OUTPUT FILE
-        String outputFileName = args[1];
-        File outputFile = new File(outputFileName);
+        String outputDatFileName = args[1];
+        File outputFile = new File(outputDatFileName);
         
         if (outputFile.exists()) {
-            LOGGER.error("Output File [{}] already exists on the filepath.", outputFileName);
+            LOGGER.error("Output File [{}] already exists on the filepath.", outputDatFileName);
             System.exit(1);
         }
         
@@ -59,8 +60,8 @@ public class Main {
             LOGGER.error("Unable to parse XML Input file {} : {}", inputXmlFileName, ex.getMessage());
             System.exit(1);
         }
-        
-        // WRITE PIPE DELIMITED OUTPUT FILE
+
+        // BUILD OUTPUT CONTENT
         TextStringBuilder sb = new TextStringBuilder();
         
         for (Map<String, String> result : results) {
@@ -75,11 +76,12 @@ public class Main {
 
         LOGGER.debug(sb.toString());
         
+        // WRITE PIPE DELIMITED OUTPUT FILE
         try {
             FileUtils.writeStringToFile(outputFile, sb.toString(), StandardCharsets.UTF_8, false);
-            LOGGER.info("Content written to: {}", outputFileName);
+            LOGGER.info("Content written to: {}", outputDatFileName);
         } catch (IOException ex) {
-            LOGGER.error("Unable to write data to output file {} : {}", outputFileName, outputFile);
+            LOGGER.error("Unable to write data to output file {} : {}", outputDatFileName, outputFile);
         }
 
     }
